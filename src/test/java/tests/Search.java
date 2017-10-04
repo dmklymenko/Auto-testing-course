@@ -27,6 +27,5 @@ public class Search extends Main{
     			.verifyAuthorProfile(author)
     			.openTabWithArticles()
     			.verifyArticleInList(articleTitle);
-    	
     }
 } // END -- class
