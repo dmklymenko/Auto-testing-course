@@ -13,4 +13,14 @@ public class Docs extends Main{
                 .createNewFile()
                 .verifyFile();
     }
+    
+    @Test
+    public void createDocAndCheckItInGoogleDrive(){
+    	MainPage mainPage = new MainPage();
+    	mainPage.goToDocs()
+    			.createNewFile()
+    			.fillFileWithData()
+    			.goToGoogleDrive()
+    			.verifyFileInGoogleDrive();
+    }
 }
