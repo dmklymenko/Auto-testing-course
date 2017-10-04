@@ -17,7 +17,7 @@ public class Search extends Main{
     @Test
     public void searchArticleAndCheckItInUserProfile(){
     	String articleTitle = "Что такое Selenium? / Хабрахабр";
-    	String authorName = "";
+    	String authorName = "barancev";
     	
     	MainPage mainPage = new MainPage();
     	mainPage.enterSearchCriteria()
