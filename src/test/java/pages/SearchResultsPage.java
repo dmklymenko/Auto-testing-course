@@ -9,8 +9,8 @@ public class SearchResultsPage {
         return new Button(By.linkText(linkText));
     }
 
-    public SearchResultsPage clickOnSearchResultLink(String linkText) {
+    public ArticlePage clickOnSearchResultLink(String linkText) {
         searchResultLink(linkText).click();
-        return this;
+        return new ArticlePage();
     }
 }

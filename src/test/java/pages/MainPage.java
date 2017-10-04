@@ -59,5 +59,10 @@ public class MainPage {
         return new DocumentsPage();
     }
 
+	public MainPage enterSearchPhrase(String articleTitle) {
+		searchInput.fillIn(articleTitle);
+		return this;
+	}
+
 
 }

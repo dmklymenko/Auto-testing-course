@@ -20,11 +20,11 @@ public class Search extends Main{
     	String authorName = "barancev";
     	
     	MainPage mainPage = new MainPage();
-    	mainPage.enterSearchCriteria()
+    	mainPage.enterSearchPhrase(articleTitle)
     			.performSearch()
     			.clickOnSearchResultLink(articleTitle)
-    			.openAuthorProfile()
-    			.verifyAuthorProfile(author)
+    			.goToAuthorProfile(authorName)
+    			.verifyAuthorProfile(authorName)
     			.openTabWithArticles()
     			.verifyArticleInList(articleTitle);
     }
