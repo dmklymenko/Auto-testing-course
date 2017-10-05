@@ -1,4 +1,4 @@
-package pages;
+package pages.GooglePages;
 
 import elements.Button;
 import elements.Label;
@@ -14,25 +14,16 @@ import java.sql.Driver;
 public class DocumentsPage {
 
     private Button createNewFileButton = new Button(By.xpath("//img[@src='https://ssl.gstatic.com/docs/templates/thumbnails/docs-blank_1.png']/.."));
-    private Label documentLabel = new Label(By.xpath("//body[@itemtype='http://schema.org/CreativeWork/DocumentObject']"));
 
-    public DocumentsPage createNewFile() {
+    public NewDocumentPage createNewFile() {
         createNewFileButton.waitAndClick();
-        return this;
+        return new NewDocumentPage();
     }
-
-    public void verifyFile(){
-        waitInSeconds(2);
-        assertTrue(documentLabel.isPresent());
-    }
-
-	public GoogleDrivePage goToGoogleDrive() {
+    
+    // Переход из открытого гугл документа в гугл драйв
+	public GoogleDrivePageMain goToGoogleDrive() {
 		new ChromeDriver().get("https://drive.google.com/drive/my-drive");
-		return new GoogleDrivePage();
+		return new GoogleDrivePageMain();
 	}
 
-	public DocumentsPage fillFileWithData() {
-		
-		return this;
-	}
 }

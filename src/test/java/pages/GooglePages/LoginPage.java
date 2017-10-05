@@ -1,4 +1,4 @@
-package pages;
+package pages.GooglePages;
 
 import elements.Button;
 import elements.TextInput;

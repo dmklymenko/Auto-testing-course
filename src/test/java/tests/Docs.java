@@ -1,11 +1,12 @@
 package tests;
 
 import org.testng.annotations.Test;
-import pages.MainPage;
+
+import pages.GooglePages.MainPage;
 
 public class Docs extends Main{
 
-    @Test(priority = 1)
+    @Test(enabled = false)
     public void docsTest(){
         String folderName = "Test Folder";
         MainPage mainPage = new MainPage();
@@ -19,8 +20,8 @@ public class Docs extends Main{
     	MainPage mainPage = new MainPage();
     	mainPage.goToDocs()
     			.createNewFile()
-    			.fillFileWithData()
-    			.goToGoogleDrive()
-    			.verifyFileInGoogleDrive();
+    			.fillDocWithData()
+    			.goToGoogleDrive();
+//    			.verifyFileInListInGoogleDrive();
     }
 }

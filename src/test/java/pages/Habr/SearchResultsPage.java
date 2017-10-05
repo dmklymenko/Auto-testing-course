@@ -1,4 +1,4 @@
-package pages;
+package pages.Habr;
 
 import elements.Button;
 import org.openqa.selenium.By;

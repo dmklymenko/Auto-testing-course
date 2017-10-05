@@ -1,6 +1,7 @@
 package tests;
 
 import java.awt.*;
+import java.util.Calendar;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.Dimension;
@@ -17,12 +18,13 @@ public class Main {
 
     @BeforeClass
     public void setUp(){
-        System.setProperty("webdriver.chrome.driver", "F:\\repos\\test\\src\\drivers\\chromedriver_2_29.exe");
+    	System.setProperty("webdriver.chrome.driver", "src/test/java/drivers/chromedriver_2_29.exe");
         ChromeOptions options = new ChromeOptions();
         ChromeDriver chromeDriver = new ChromeDriver(options);
         driver = new EventFiringWebDriver(chromeDriver);
         driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
         getDriver().get(baseUrl);
+        maximizeScreen(driver);
     }
 
     @AfterClass(alwaysRun = true)
@@ -40,6 +42,11 @@ public class Main {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+    }
+    
+    public static String getCurrentTimeStamp(){
+    	Calendar calendar = Calendar.getInstance();
+		return String.valueOf(calendar.getTimeInMillis());
     }
 
     private static void maximizeScreen(WebDriver driver) {

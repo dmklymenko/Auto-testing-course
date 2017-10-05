@@ -1,10 +1,12 @@
-package pages;
+package pages.GooglePages;
 
 import elements.Button;
 import elements.TextInput;
-import org.openqa.selenium.By;
+import pages.Habr.SearchResultsPage;
 
-import static pages.LoginPage.loginPageisShown;
+import static pages.GooglePages.LoginPage.loginPageisShown;
+
+import org.openqa.selenium.By;
 
 public class MainPage {
 
@@ -17,9 +19,9 @@ public class MainPage {
     private Button uButton = new Button(By.id("K69"));
     private Button mButton = new Button(By.id("K86"));
     private Button searchButton = new Button(By.cssSelector("input.lsb"));
-    private Button navigationButton = new Button(By.cssSelector("[title='Додатки Google']"));
-    private Button moreButton = new Button(By.linkText("Більше"));
-    private Button doccumentsButton = new Button(By.xpath("//span[text()='Документи']"));
+    private Button navigationButton = new Button(By.xpath("(//div/a[contains(@title, 'Google')])[1]"));
+    private Button moreButton = new Button(By.xpath("(//div/a[contains(@aria-label, 'Google')])[1]"));
+    private Button doccumentsButton = new Button(By.xpath("//span[contains(text(), 'Документ')]"));
 
     private TextInput recoveryEmailInput = new TextInput(By.cssSelector("placeholder='you@example.com'"));
     private TextInput searchInput = new TextInput(By.xpath("//input[@title = 'Поиск']"));
@@ -45,10 +47,11 @@ public class MainPage {
         searchButton.click();
         return new SearchResultsPage();
     }
-
+    
+    // Переход из главной страницы в гугл документы
     public DocumentsPage goToDocs() {
-        navigationButton.click();
-        moreButton.click();
+        navigationButton.waitAndClick();
+        moreButton.waitAndClick();
         doccumentsButton.waitAndClick();
         if(loginPageisShown()){
             new LoginPage().login();
