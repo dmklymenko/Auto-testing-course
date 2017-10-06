@@ -3,8 +3,11 @@ package pages.GooglePages;
 import elements.Button;
 import elements.TextInput;
 import pages.Habr.SearchResultsPage;
+import tests.Main;
 
 import static pages.GooglePages.LoginPage.loginPageisShown;
+import static tests.Main.getDriver;
+import static tests.Main.waitInSeconds;
 
 import org.openqa.selenium.By;
 
@@ -51,8 +54,15 @@ public class MainPage {
     // Переход из главной страницы в гугл документы
     public DocumentsPage goToDocs() {
         navigationButton.waitAndClick();
+        waitInSeconds(1);
         moreButton.waitAndClick();
+        waitInSeconds(1);
         doccumentsButton.waitAndClick();
+        waitInSeconds(1);
+        if(getDriver().getCurrentUrl() == "https://hangouts.google.com/"){
+        	getDriver().get(new Main().getBaseUrl());
+        	goToDocs();
+        }
         if(loginPageisShown()){
             new LoginPage().login();
         }

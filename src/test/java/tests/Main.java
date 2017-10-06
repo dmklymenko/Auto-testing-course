@@ -22,7 +22,7 @@ public class Main {
         ChromeOptions options = new ChromeOptions();
         ChromeDriver chromeDriver = new ChromeDriver(options);
         driver = new EventFiringWebDriver(chromeDriver);
-        driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         getDriver().get(baseUrl);
         maximizeScreen(driver);
     }
@@ -34,6 +34,10 @@ public class Main {
 
     public static WebDriver getDriver(){
         return driver;
+    }
+    
+    public String getBaseUrl(){
+    	return baseUrl;
     }
 
     public static void waitInSeconds(int seconds){

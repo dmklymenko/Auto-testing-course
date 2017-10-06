@@ -40,7 +40,7 @@ public abstract class Element {
 //        TestCase.setImplicitlyWait(0);
 //        log.info("Attempt to wait until element found " + by + " will be appeared");
         new FluentWait(getDriver())
-                .withTimeout(30000, TimeUnit.MILLISECONDS)
+                .withTimeout(10000, TimeUnit.MILLISECONDS)
                 .pollingEvery(200, TimeUnit.MILLISECONDS)
                 .ignoring(NoSuchElementException.class)
                 .withMessage("Element found by " + by + " is still invisible, but should not be")

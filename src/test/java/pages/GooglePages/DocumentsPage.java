@@ -13,17 +13,11 @@ import java.sql.Driver;
 
 public class DocumentsPage {
 
-    private Button createNewFileButton = new Button(By.xpath("//img[@src='https://ssl.gstatic.com/docs/templates/thumbnails/docs-blank_1.png']/.."));
+    private Button createNewFileButton = new Button(By.xpath("//*[@id=':1d']"));
 
     public NewDocumentPage createNewFile() {
         createNewFileButton.waitAndClick();
         return new NewDocumentPage();
     }
     
-    // Переход из открытого гугл документа в гугл драйв
-	public GoogleDrivePageMain goToGoogleDrive() {
-		new ChromeDriver().get("https://drive.google.com/drive/my-drive");
-		return new GoogleDrivePageMain();
-	}
-
 }
