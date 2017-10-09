@@ -1,8 +1,9 @@
-package tests;
+package tests.google;
 
 import org.testng.annotations.Test;
 
 import pages.GooglePages.MainPage;
+import tests.Main;
 
 public class Docs extends Main{
 
@@ -15,7 +16,7 @@ public class Docs extends Main{
                 .verifyFile();
     }
     
-    @Test
+    @Test(enabled = false)
     public void createDocAndCheckItInGoogleDrive(){
     	MainPage mainPage = new MainPage();
     	mainPage.goToDocs()
@@ -23,5 +24,19 @@ public class Docs extends Main{
     			.fillDocWithData()
     			.goToGoogleDrive()
     			.verifyFileInListInGoogleDrive();
+    }
+    
+    @Test(enabled = false)
+    public void verifyUserNameAndEmailInGoogleDrive(){
+    	MainPage mainPage = new MainPage();
+    	mainPage.goToGoogleDriveDirectly()
+    			.verifyUserNameAndEmail();
+    }
+    
+    @Test
+    public void verifyFilesCountInDifferentViews(){
+    	MainPage mainPage = new MainPage();
+    	mainPage.goToGoogleDriveDirectly()
+    			.verifyFilesCountInDifferentViews();
     }
 }

@@ -1,8 +1,9 @@
-package tests;
+package tests.habr;
 
 import org.testng.annotations.Test;
 
 import pages.GooglePages.MainPage;
+import tests.Main;
 
 public class Search extends Main{
 

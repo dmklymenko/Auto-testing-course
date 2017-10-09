@@ -2,9 +2,10 @@ package pages.GooglePages;
 
 import elements.Button;
 import elements.TextInput;
-import org.openqa.selenium.By;
 
 import static tests.Main.waitInSeconds;
+
+import org.openqa.selenium.By;
 
 public class LoginPage {
 

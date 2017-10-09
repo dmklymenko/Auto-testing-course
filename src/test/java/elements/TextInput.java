@@ -1,10 +1,10 @@
 package elements;
 
+import static tests.Main.getDriver;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
-
-import static tests.Main.getDriver;
 
 public class TextInput extends Element {
 

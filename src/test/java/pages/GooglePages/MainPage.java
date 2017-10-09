@@ -77,5 +77,15 @@ public class MainPage {
 		return this;
 	}
 
+	public GoogleDrivePageMain goToGoogleDriveDirectly() {
+		getDriver().get("https://drive.google.com/drive/my-drive");
+		
+		if(loginPageisShown()){
+            new LoginPage().login();
+        }
+		
+		return new GoogleDrivePageMain();
+	}
+
 
 }
