@@ -1,26 +1,37 @@
 package pages.GooglePages;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 
 import elements.Label;
 import elements.TextInput;
 
 import static org.testng.AssertJUnit.assertTrue;
 import static tests.Main.getCurrentTimeStamp;
-//import tests.Main.getCurrentTimeStamp;
+import static tests.Main.getDriver;
 import static tests.Main.waitInSeconds;
 
 public class NewDocumentPage {
+	
+	private String docTitle;
 	
 	private TextInput docTitleInput = new TextInput(By.xpath("//input[@class='docs-title-input']"));
 	private TextInput docBodyInput = new TextInput(By.xpath("//span[2]/span/span"));
 	private Label documentLabel = new Label(By.xpath("//body[@itemtype='http://schema.org/CreativeWork/DocumentObject']"));
 	
+	public NewDocumentPage(){	
+	}
+	
+	public NewDocumentPage(String docTitle){	
+		this.docTitle = docTitle;
+	}
+	
 	public NewDocumentPage fillDocWithData() {
-		String docTitle = "New test DOC " + getCurrentTimeStamp();
-		docBodyInput.fillInWithJS("Just enjoy!", "//span[2]/span/span"); // использ. xpath textAreaInput (body гугл дока)
+		docTitle = "New test DOC " + getCurrentTimeStamp();
 		docTitleInput.fillIn(docTitle);
-		return new NewDocumentPage();
+		docTitleInput.fillIn(Keys.TAB);
+		waitInSeconds(2); // Ожидаем пока документ сохранится
+		return new NewDocumentPage(docTitle);
 	}
 	
     public void verifyFile(){
@@ -29,8 +40,8 @@ public class NewDocumentPage {
     }
 
 	public GoogleDrivePageMain goToGoogleDrive() {
-		// реализовать логику перехода в гугл драйв
-		return new GoogleDrivePageMain();
+		getDriver().get("https://drive.google.com/drive/my-drive");
+		return new GoogleDrivePageMain(docTitle);
 	}
 	
 	

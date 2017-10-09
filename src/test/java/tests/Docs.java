@@ -21,7 +21,7 @@ public class Docs extends Main{
     	mainPage.goToDocs()
     			.createNewFile()
     			.fillDocWithData()
-    			.goToGoogleDrive();
-//    			.verifyFileInListInGoogleDrive();
+    			.goToGoogleDrive()
+    			.verifyFileInListInGoogleDrive();
     }
 }
