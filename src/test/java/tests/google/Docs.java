@@ -33,10 +33,25 @@ public class Docs extends Main{
     			.verifyUserNameAndEmail();
     }
     
-    @Test
+    @Test(enabled = false)
     public void verifyFilesCountInDifferentViews(){
     	MainPage mainPage = new MainPage();
     	mainPage.goToGoogleDriveDirectly()
     			.verifyFilesCountInDifferentViews();
+    }
+    
+    @Test(enabled = false)
+    public void verifyNewFolderCreation(){
+    	MainPage mainPage = new MainPage();
+    	
+    	mainPage.goToGoogleDriveDirectly()
+    			.createNewFolder()
+    			.verifyNewFolderCreated();
+    }
+    
+    @Test
+    public void verifyMenuItemsTitles(){
+    	MainPage mainPage = new MainPage();
+    	
     }
 }

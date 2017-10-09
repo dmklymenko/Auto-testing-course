@@ -29,6 +29,10 @@ public class TextInput extends Element {
     	js.executeScript(jsScript);   	
     } // END -- fillInWithJS
 
+	public void clear() {
+		composeWebElement(by).clear();
+	}
+
 	
 
 } // END -- class TextInput

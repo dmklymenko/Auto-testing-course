@@ -4,6 +4,7 @@ import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
 import static tests.Main.getDriver;
+import static tests.Main.getCurrentTimeStamp;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -13,29 +14,34 @@ import org.openqa.selenium.WebElement;
 
 import elements.Button;
 import elements.Label;
+import elements.TextInput;
 
 public class GoogleDrivePageMain {
 	
-	private String fileTitle;
+	private String fileTitleForChecking;
 	
 	private Button accountPopup = new Button(By.xpath("(//div/a[contains(@aria-label, 'Google')])[3]"));  
 	private Label userEmailLabel = new Label(By.xpath("//div/a[contains(@aria-label, 'Change profile picture')]/parent::*/div/div[2]"));
 	private Button changeViewButton = new Button(By.xpath("//div[@role = 'button' and @data-tooltip-unhoverable][6]"));
+	private Button createNewItemButton = new Button(By.xpath("//div/button[@type = 'button'][1]"));
+	private Button createNewFolderButton = new Button(By.xpath("//span/span/div[text() = 'Папка' or text() = 'Folder']"));
+	private TextInput newFolderInput = new TextInput(By.xpath("//div/div/input"));
+	private Button confirmationOKButton = new Button(By.xpath("//button[@name = 'ok']"));
 		
 	public GoogleDrivePageMain(){	
 	}
 	
 	public GoogleDrivePageMain(String fileTitle){
-		this.fileTitle = fileTitle;
+		this.fileTitleForChecking = fileTitle;
 	}
 	
-	public Label getSpecifiedLabelElement(String filename){
-		return new Label(By.xpath("(//span[text()='" + fileTitle + "'])[2]"));
+	private Label getSpecifiedLabelElement(String filename){
+		return new Label(By.xpath("(//span[text()='" + fileTitleForChecking + "'])[2]"));
 	}
 
 	public void verifyFileInListInGoogleDrive() {
 		// В методе динамически создаем элемент для проверки
-		assertTrue(getSpecifiedLabelElement(fileTitle).isPresent());
+		assertTrue(getSpecifiedLabelElement(fileTitleForChecking).isPresent());
 	}
 
 	public GoogleDrivePageMain verifyUserNameAndEmail() {
@@ -44,7 +50,7 @@ public class GoogleDrivePageMain {
 		return new GoogleDrivePageMain();
 	}
 
-	public void verifyFilesCountInDifferentViews() {
+	public GoogleDrivePageMain verifyFilesCountInDifferentViews() {
 		// определяем количество элементов на странице в исходном виде
 		List<WebElement> filesInList = getDriver().findElements(By.xpath("//div[@data-target = 'doc']"));
 		int listViewNumberOfFiles = filesInList.size();
@@ -55,6 +61,26 @@ public class GoogleDrivePageMain {
 		int gridViewNumberOfFiles = filesInList.size();
 		
 		assertEquals(gridViewNumberOfFiles, listViewNumberOfFiles);
+		
+		return new GoogleDrivePageMain();
+	}
+
+	public GoogleDrivePageMain createNewFolder() {
+		createNewItemButton.waitAndClick();
+		createNewFolderButton.waitAndClick(); // element not visible. Найти workaround
+		newFolderInput.waitAndClick();
+		String newFolderTitle = "New test Folder " + getCurrentTimeStamp();
+		newFolderInput.clear();
+		newFolderInput.fillIn(newFolderTitle);
+		confirmationOKButton.click();
+		
+		return new GoogleDrivePageMain(newFolderTitle);
+	}
+
+	public GoogleDrivePageMain verifyNewFolderCreated() {
+		assertTrue(new Label(By.xpath("//div/span[text() = '" + fileTitleForChecking + "' and @data-is-doc-name]")).isPresent());
+		
+		return new GoogleDrivePageMain();
 	}
 	
 
