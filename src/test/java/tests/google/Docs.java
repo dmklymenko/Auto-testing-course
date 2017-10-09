@@ -49,11 +49,22 @@ public class Docs extends Main{
     			.verifyNewFolderCreated();
     }
     
-    @Test
+    @Test(enabled = false)
     public void verifyMenuItemsTitles(){
     	MainPage mainPage = new MainPage();
     	
     	mainPage.goToGoogleDriveDirectly()
     			.verifyMenuItemsTitles();
+    }
+    
+    @Test
+    public void verifyAddingFilesToStarredFolder(){
+    	MainPage mainPage = new MainPage();
+    	
+    	mainPage.goToGoogleDriveDirectly()
+    			.createNewDocFile()
+    			.markFileAsStarred()
+    			.goToStarredFilesFolder()
+    			.verifyFileInStarredFolder();
     }
 }

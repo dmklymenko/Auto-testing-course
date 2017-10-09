@@ -39,9 +39,10 @@ public class GoogleDrivePageMain {
 		return new Label(By.xpath("(//span[text()='" + fileTitleForChecking + "'])[2]"));
 	}
 
-	public void verifyFileInListInGoogleDrive() {
+	public GoogleDrivePageMain verifyFileInListInGoogleDrive() {
 		// В методе динамически создаем элемент для проверки
 		assertTrue(getSpecifiedLabelElement(fileTitleForChecking).isPresent());
+		return new GoogleDrivePageMain();
 	}
 
 	public GoogleDrivePageMain verifyUserNameAndEmail() {
