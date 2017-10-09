@@ -53,5 +53,7 @@ public class Docs extends Main{
     public void verifyMenuItemsTitles(){
     	MainPage mainPage = new MainPage();
     	
+    	mainPage.goToGoogleDriveDirectly()
+    			.verifyMenuItemsTitles();
     }
 }

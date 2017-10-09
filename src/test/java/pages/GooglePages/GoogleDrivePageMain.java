@@ -2,7 +2,7 @@ package pages.GooglePages;
 
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
-
+import static org.testng.Assert.fail;
 import static tests.Main.getDriver;
 import static tests.Main.getCurrentTimeStamp;
 
@@ -79,6 +79,33 @@ public class GoogleDrivePageMain {
 
 	public GoogleDrivePageMain verifyNewFolderCreated() {
 		assertTrue(new Label(By.xpath("//div/span[text() = '" + fileTitleForChecking + "' and @data-is-doc-name]")).isPresent());
+		
+		return new GoogleDrivePageMain();
+	}
+
+	public GoogleDrivePageMain verifyMenuItemsTitles() {
+		// Массив эталонных значений
+		String[] expectedMenuItemsTitles = {"My Drive",
+											"Computers",
+											"Shared with me",
+											"Recent",
+											"Google Photos",
+											"Starred",
+											"Trash",
+											"Backups"};
+		
+		// Берем массив названий элементов меню сайдбара и проверяем соответствия
+		List<WebElement> actualdMenuItemsTitles = getDriver().findElements(By.xpath("//div[@role = 'treeitem']//span"));
+
+		// Если количество элементов разное, то сразу ошибка
+		if(expectedMenuItemsTitles.length != actualdMenuItemsTitles.size()){
+			fail();
+		}
+		else{
+			for(int i = 0; i < expectedMenuItemsTitles.length; i++){
+				assertEquals(actualdMenuItemsTitles.get(i).getText(), expectedMenuItemsTitles[i]);
+			}
+		}
 		
 		return new GoogleDrivePageMain();
 	}
