@@ -6,6 +6,7 @@ import static org.testng.Assert.fail;
 import static tests.Main.getDriver;
 import static tests.Main.getCurrentTimeStamp;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -17,31 +18,26 @@ import elements.Label;
 import elements.TextInput;
 
 public class GoogleDrivePageMain {
-	
-	private String fileTitleForChecking;
-	
-	private Button accountPopup = new Button(By.xpath("(//div/a[contains(@aria-label, 'Google')])[3]"));  
+	  
 	private Label userEmailLabel = new Label(By.xpath("//div/a[contains(@aria-label, 'Change profile picture')]/parent::*/div/div[2]"));
+	
+	private TextInput newFolderNameInput = new TextInput(By.xpath("//div/div/input"));
+	
+	private Button accountPopup = new Button(By.xpath("(//div/a[contains(@aria-label, 'Google')])[3]"));
 	private Button changeViewButton = new Button(By.xpath("//div[@role = 'button' and @data-tooltip-unhoverable][6]"));
+	private Button starredContextMenuItem = new Button(By.xpath("(//div/span[2]/span/div)[8]"));
+	private Button starredSidebarMenuItem = new Button(By.xpath("(//div[@data-name = 'name']/span)[6]"));
 	private Button createNewItemButton = new Button(By.xpath("//div/button[@type = 'button'][1]"));
 	private Button createNewFolderButton = new Button(By.xpath("//span/span/div[text() = 'Папка' or text() = 'Folder']"));
-	private TextInput newFolderInput = new TextInput(By.xpath("//div/div/input"));
+	private Button createNewDocButton = new Button(By.xpath("//span/span/div[text() = 'Google Документы' or text() = 'Google Docs']"));
 	private Button confirmationOKButton = new Button(By.xpath("//button[@name = 'ok']"));
 		
-	public GoogleDrivePageMain(){	
-	}
-	
-	public GoogleDrivePageMain(String fileTitle){
-		this.fileTitleForChecking = fileTitle;
-	}
-	
-	private Label getSpecifiedLabelElement(String filename){
-		return new Label(By.xpath("(//span[text()='" + fileTitleForChecking + "'])[2]"));
-	}
-
-	public GoogleDrivePageMain verifyFileInListInGoogleDrive() {
+	/* ===============================================================
+	 * Проверки
+	 * =============================================================== */
+	public GoogleDrivePageMain verifyFileInListInGoogleDrive(String fileTitleForChecking) {
 		// В методе динамически создаем элемент для проверки
-		assertTrue(getSpecifiedLabelElement(fileTitleForChecking).isPresent());
+		assertTrue(new Label(By.xpath("//span[text()='" + fileTitleForChecking + "']")).isPresent());
 		return new GoogleDrivePageMain();
 	}
 
@@ -65,21 +61,9 @@ public class GoogleDrivePageMain {
 		
 		return new GoogleDrivePageMain();
 	}
-
-	public GoogleDrivePageMain createNewFolder() {
-		createNewItemButton.waitAndClick();
-		createNewFolderButton.waitAndClick(); // element not visible. Найти workaround
-		newFolderInput.waitAndClick();
-		String newFolderTitle = "New test Folder " + getCurrentTimeStamp();
-		newFolderInput.clear();
-		newFolderInput.fillIn(newFolderTitle);
-		confirmationOKButton.click();
-		
-		return new GoogleDrivePageMain(newFolderTitle);
-	}
-
-	public GoogleDrivePageMain verifyNewFolderCreated() {
-		assertTrue(new Label(By.xpath("//div/span[text() = '" + fileTitleForChecking + "' and @data-is-doc-name]")).isPresent());
+	
+	public GoogleDrivePageMain verifyNewFolderCreated(String folderTitleForChecking) {
+		assertTrue(new Label(By.xpath("//div/span[text() = '" + folderTitleForChecking + "' and @data-is-doc-name]")).isPresent());
 		
 		return new GoogleDrivePageMain();
 	}
@@ -107,9 +91,55 @@ public class GoogleDrivePageMain {
 				assertEquals(actualdMenuItemsTitles.get(i).getText(), expectedMenuItemsTitles[i]);
 			}
 		}
+		return new GoogleDrivePageMain();
+	}
+	
+	/* ===============================================================
+	 * Создание новых items (папки, файлы etc.)
+	 * ===============================================================	 */
+	public GoogleDrivePageMain createNewFolder(String newFolderTitle) {
+		createNewItemButton.waitAndClick();
+		createNewFolderButton.waitAndClick();
+		newFolderNameInput.waitAndClick();
+		newFolderNameInput.clear();
+		newFolderNameInput.fillIn(newFolderTitle);
+		confirmationOKButton.click();
 		
 		return new GoogleDrivePageMain();
 	}
 	
+	public GoogleDrivePageMain createNewDocFile(String fileName) {
+		createNewItemButton.waitAndClick();
+		createNewDocButton.waitAndClick();
+		
+		// Переключаемся в новую вкладку, т.к. новый документ открывается в ней
+		ArrayList<String> tabs = new ArrayList<String>(getDriver().getWindowHandles());
+		getDriver().switchTo().window(tabs.get(1));
+		NewDocumentPage newDocumentPage = new NewDocumentPage();
+		newDocumentPage.fillDocWithData(fileName);
+		
+		// После заполнения документа закрываем вкладку с документом и возвращаемся в первую
+		getDriver().close();
+		getDriver().switchTo().window(tabs.get(0));
+		return newDocumentPage.goToGoogleDrive();
+	}
+	
+	/* ===============================================================
+	 * Прочие действия с items
+	 * ===============================================================	 */
+
+	public GoogleDrivePageMain markFileAsStarred(String fileName) {
+		// найти созданный файл в списке
+		Button starredFileLabel = new Button(By.xpath("//span[text()='" + fileName + "']"));
+		// Отметить файл
+		starredFileLabel.rightClick();
+		starredContextMenuItem.waitAndClick();
+		return new GoogleDrivePageMain();
+	}
+	
+	public StarredFilesPage goToStarredFilesFolder() {
+		starredSidebarMenuItem.click();
+		return new StarredFilesPage();
+	}
 
 }

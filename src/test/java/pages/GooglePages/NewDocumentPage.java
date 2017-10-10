@@ -13,7 +13,7 @@ import static tests.Main.waitInSeconds;
 
 public class NewDocumentPage {
 	
-	private String docTitle;
+//	private String docTitle;
 	
 	private TextInput docTitleInput = new TextInput(By.xpath("//input[@class='docs-title-input']"));
 	private TextInput docBodyInput = new TextInput(By.xpath("//span[2]/span/span"));
@@ -22,16 +22,15 @@ public class NewDocumentPage {
 	public NewDocumentPage(){	
 	}
 	
-	public NewDocumentPage(String docTitle){	
-		this.docTitle = docTitle;
-	}
+//	public NewDocumentPage(String docTitle){	
+//		this.docTitle = docTitle;
+//	}
 	
-	public NewDocumentPage fillDocWithData() {
-		docTitle = "New test DOC " + getCurrentTimeStamp();
-		docTitleInput.fillIn(docTitle);
+	public NewDocumentPage fillDocWithData(String fileName) {
+		docTitleInput.fillIn(fileName);
 		docTitleInput.fillIn(Keys.TAB);
 		waitInSeconds(2); // Ожидаем пока документ сохранится
-		return new NewDocumentPage(docTitle);
+		return new NewDocumentPage();
 	}
 	
     public void verifyFile(){
@@ -41,7 +40,8 @@ public class NewDocumentPage {
 
 	public GoogleDrivePageMain goToGoogleDrive() {
 		getDriver().get("https://drive.google.com/drive/my-drive");
-		return new GoogleDrivePageMain(docTitle);
+		return new GoogleDrivePageMain();
+//		return new GoogleDrivePageMain(docTitle);
 	}
 	
 	

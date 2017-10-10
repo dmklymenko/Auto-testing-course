@@ -2,6 +2,7 @@ package elements;
 
 import com.google.common.base.Function;
 import org.openqa.selenium.*;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -32,7 +33,7 @@ public abstract class Element {
     }
 
     public void waitForElementToBeClickable() {
-        WebDriverWait wait = new WebDriverWait(getDriver(), 30);
+        WebDriverWait wait = new WebDriverWait(getDriver(), 10);
         wait.until(ExpectedConditions.elementToBeClickable(by));
     }
 
@@ -55,6 +56,24 @@ public abstract class Element {
                     }
                 });
 //        TestCase.setImplicitlyWait(TestCase.DEFAULT_WAIT);
+    }
+    
+    public void rightClick(){
+    	WebElement element = composeWebElement(by);
+    	
+    	try {
+			Actions action = new Actions(getDriver()).contextClick(element);
+			action.build().perform();
+		} catch (StaleElementReferenceException e) {
+			System.out.println("Element is not attached to the page document "
+					+ e.getStackTrace());
+		} catch (NoSuchElementException e) {
+			System.out.println("Element " + element + " was not found in DOM "
+					+ e.getStackTrace());
+		} catch (Exception e) {
+			System.out.println("Element " + element + " was not clickable "
+					+ e.getStackTrace());
+		}
     }
 
     public boolean isPresent() {

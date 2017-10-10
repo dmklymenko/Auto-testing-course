@@ -16,7 +16,7 @@ public class Main {
     private static WebDriver driver;
     private String baseUrl = "https://www.google.com.ua/";
 
-    @BeforeClass
+    @BeforeMethod
     public void setUp(){
     	System.setProperty("webdriver.chrome.driver", "src/test/java/drivers/chromedriver_2_29.exe");
         ChromeOptions options = new ChromeOptions();
@@ -27,7 +27,7 @@ public class Main {
         maximizeScreen(driver);
     }
 
-    @AfterClass(alwaysRun = true)
+    @AfterMethod(alwaysRun = true)
     public void tearDown(){
         driver.quit();
     }
