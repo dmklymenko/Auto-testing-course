@@ -30,9 +30,9 @@ public class GmailPage {
 		boolean emailIsReceived = false;
 			do {
 				i++;
-				refreshButton.click();
+				refreshButton.waitAndClick();
 				waitInSeconds(1);
-				if(new Label(By.xpath("//div/span[text() = '" + emailTitle + "']")).isPresent()){
+				if(new Label(By.xpath("//div/span/b[text() = '" + emailTitle + "']")).isPresent()){
 					emailIsReceived = true;
 				}
 			} while (i < 4 && !emailIsReceived); // Всего 3 цикла, т.к. неявное ожидание добавляет времени

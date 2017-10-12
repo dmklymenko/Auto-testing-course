@@ -6,7 +6,7 @@ import pages.GooglePages.MainPage;
 import tests.Main;
 import utils.DateTime;
 
-public class Gmail extends Main{
+public class GmailTest extends Main{
 	@Test(enabled = true)
 	public void verifyCreatingAndGettingNewEmail(){
 		MainPage mainPage = new MainPage();

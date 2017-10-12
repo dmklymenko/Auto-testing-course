@@ -6,6 +6,7 @@ import pages.Habr.SearchResultsPage;
 import tests.Main;
 
 import static pages.GooglePages.LoginPage.loginPageisShown;
+import static pages.GooglePages.GmailLoginPage.gmailLoginPageIsShown;
 import static tests.Main.getDriver;
 import static tests.Main.waitInSeconds;
 
@@ -78,11 +79,13 @@ public class MainPage {
         waitInSeconds(1);
         emailButton.click();
         waitInSeconds(1);
+        if(gmailLoginPageIsShown()){
+        	new GmailLoginPage().clickToSignInButton();
+        }
+        
         if(loginPageisShown()){
             new LoginPage().login();
         }
-        
-
         
         return new GmailPage();
     }

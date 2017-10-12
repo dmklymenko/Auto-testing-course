@@ -6,7 +6,7 @@ import pages.GooglePages.MainPage;
 import tests.Main;
 import static utils.DateTime.getCurrentDateTimeStamp;
 
-public class Drive extends Main{
+public class DriveTest extends Main{
 	
 	@Test(enabled = false)
     public void createDocAndCheckItInGoogleDrive(){
