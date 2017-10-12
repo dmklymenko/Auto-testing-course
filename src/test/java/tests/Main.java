@@ -27,6 +27,7 @@ public class Main {
     public void setUp(){
     	System.setProperty("webdriver.chrome.driver", "src/test/java/drivers/chromedriver_2_29.exe");
         ChromeOptions options = new ChromeOptions();
+//        options.addArguments("--lang=en_US"); // Internationalization -> Set browser language
         ChromeDriver chromeDriver = new ChromeDriver(options);
         driver = new EventFiringWebDriver(chromeDriver);
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);

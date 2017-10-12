@@ -4,13 +4,13 @@ import org.testng.annotations.Test;
 
 import pages.GooglePages.MainPage;
 import tests.Main;
-import static utils.DateTime.getCurrentTimeStamp;
+import static utils.DateTime.getCurrentDateTimeStamp;
 
 public class Drive extends Main{
 	
 	@Test(enabled = false)
     public void createDocAndCheckItInGoogleDrive(){
-		String fileName = "New test doc " + getCurrentTimeStamp();
+		String fileName = "New test doc " + getCurrentDateTimeStamp();
 		
     	MainPage mainPage = new MainPage();
     	mainPage.goToDocs()
@@ -36,7 +36,7 @@ public class Drive extends Main{
     
     @Test(enabled = false)
     public void verifyNewFolderCreation(){
-    	String newFolderTitle = "New test Folder " + getCurrentTimeStamp();
+    	String newFolderTitle = "New test Folder " + getCurrentDateTimeStamp();
     	
     	MainPage mainPage = new MainPage();
     	
@@ -55,7 +55,7 @@ public class Drive extends Main{
     
     @Test(enabled = true)
     public void verifyAddingFilesToStarredFolder() throws InterruptedException{
-    	String starredFileName = "New starred file " + getCurrentTimeStamp();
+    	String starredFileName = "New starred file " + getCurrentDateTimeStamp();
     	
     	MainPage mainPage = new MainPage();
     	

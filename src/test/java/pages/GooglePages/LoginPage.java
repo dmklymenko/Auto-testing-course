@@ -14,7 +14,10 @@ public class LoginPage {
         
     private Button emailNextButton = new Button(By.xpath("//div/content/span"));
     private Button passwordNextButton = new Button(By.xpath("(//div/content/span)[2]"));
-
+    
+    /* ===============================================================
+	 * ДЕЙСТВИЯ С ЭЛЕМЕНТАМИ СТРАНИЦЫ И НА СТРАНИЦЕ etc.
+	 * ===============================================================	 */
     public void login(){
         emailInput.fillIn("autopioneer1@gmail.com");
         emailNextButton.click();
@@ -22,7 +25,6 @@ public class LoginPage {
         passwordInput.fillIn("123123123A");
         passwordNextButton.click();
     }
-
 
     public static boolean loginPageisShown() {
         return emailInput.isPresent();

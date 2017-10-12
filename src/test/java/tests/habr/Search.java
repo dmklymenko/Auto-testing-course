@@ -1,5 +1,7 @@
 package tests.habr;
 
+import java.util.Locale;
+
 import org.testng.annotations.Test;
 
 import pages.GooglePages.MainPage;
@@ -7,16 +9,16 @@ import tests.Main;
 
 public class Search extends Main{
 
-    @Test
+    @Test(enabled=false)
     public void searchWithKeyboard() {
         MainPage mainPage = new MainPage();
         mainPage.activateKeyboard()
                 .enterSearchCriteria()
                 .performSearch()
                 .clickOnSearchResultLink("Что такое Selenium? / Хабрахабр");
-    }
+    } 
     
-    @Test
+    @Test(enabled=false)
     public void searchArticleAndCheckItInUserProfile(){
     	String articleTitle = "Что такое Selenium? / Хабрахабр";
     	String authorName = "barancev";
@@ -30,4 +32,5 @@ public class Search extends Main{
     			.openTabWithArticles();
 //    			.verifyArticleInList(articleTitle);
     }
+    
 } // END -- class

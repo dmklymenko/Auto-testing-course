@@ -4,7 +4,7 @@ import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 import static org.testng.Assert.fail;
 import static tests.Main.getDriver;
-import static utils.DateTime.getCurrentTimeStamp;
+import static utils.DateTime.getCurrentDateTimeStamp;
 import static tests.Main.switchToNewOpenedTab;
 import static tests.Main.closeCurrentTabAndSwitchToPrevious;
 
@@ -35,7 +35,7 @@ public class GoogleDrivePageMain {
 	private Button confirmationOKButton = new Button(By.xpath("//button[@name = 'ok']"));
 		
 	/* ===============================================================
-	 * Проверки
+	 * ПРОВЕРКИ
 	 * =============================================================== */
 	public GoogleDrivePageMain verifyFileInListInGoogleDrive(String fileTitleForChecking) {
 		// В методе динамически создаем элемент для проверки
@@ -95,6 +95,10 @@ public class GoogleDrivePageMain {
 		}
 		return new GoogleDrivePageMain();
 	}
+	
+	/* ===============================================================
+	 * ДЕЙСТВИЯ С ЭЛЕМЕНТАМИ СТРАНИЦЫ И НА СТРАНИЦЕ etc.
+	 * ===============================================================	 */
 	
 	/* ===============================================================
 	 * Создание новых items (папки, файлы etc.)

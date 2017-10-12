@@ -25,10 +25,14 @@ public class MainPage {
     private Button navigationButton = new Button(By.xpath("(//div/a[contains(@title, 'Google')])[1]"));
     private Button moreButton = new Button(By.xpath("(//div/a[contains(@aria-label, 'Google')])[1]"));
     private Button doccumentsButton = new Button(By.xpath("//span[contains(text(), 'Документ')]"));
+    private Button emailButton = new Button(By.xpath("//span[text() = 'Почта']"));
 
     private TextInput recoveryEmailInput = new TextInput(By.cssSelector("placeholder='you@example.com'"));
     private TextInput searchInput = new TextInput(By.xpath("//input[@title = 'Поиск']"));
-
+    
+    /* ===============================================================
+	 * ДЕЙСТВИЯ С ЭЛЕМЕНТАМИ СТРАНИЦЫ И НА СТРАНИЦЕ etc.
+	 * ===============================================================	 */
     public MainPage activateKeyboard(){
         activateKeyboardButton.click();
         return this;
@@ -59,10 +63,6 @@ public class MainPage {
         waitInSeconds(1);
         doccumentsButton.waitAndClick();
         waitInSeconds(1);
-        if(getDriver().getCurrentUrl() == "https://hangouts.google.com/"){
-        	getDriver().get(new Main().getBaseUrl());
-        	goToDocs();
-        }
         if(loginPageisShown()){
             new LoginPage().login();
         }
@@ -70,6 +70,21 @@ public class MainPage {
             recoveryEmailInput.fillIn("sergiitst2@gmail.com");
         }
         return new DocumentsPage();
+    }
+    
+    // Переход из главной страницы в гугл почту
+    public GmailPage goToGmail(){
+    	navigationButton.waitAndClick();
+        waitInSeconds(1);
+        emailButton.click();
+        waitInSeconds(1);
+        if(loginPageisShown()){
+            new LoginPage().login();
+        }
+        
+
+        
+        return new GmailPage();
     }
 
 	public MainPage enterSearchPhrase(String articleTitle) {
