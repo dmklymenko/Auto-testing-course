@@ -88,4 +88,12 @@ public abstract class Element {
         }
         return true;
     }
+    
+    public void scrollToElement() {
+        try {
+            ((JavascriptExecutor) getDriver()).executeScript("arguments[0].scrollIntoView();", composeWebElement(by));
+        } catch (StaleElementReferenceException ignore) {
+            //ignore this exception
+        }
+    }
 }

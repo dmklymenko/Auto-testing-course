@@ -4,7 +4,9 @@ import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 import static org.testng.Assert.fail;
 import static tests.Main.getDriver;
-import static tests.Main.getCurrentTimeStamp;
+import static utils.DateTime.getCurrentTimeStamp;
+import static tests.Main.switchToNewOpenedTab;
+import static tests.Main.closeCurrentTabAndSwitchToPrevious;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -108,19 +110,17 @@ public class GoogleDrivePageMain {
 		return new GoogleDrivePageMain();
 	}
 	
-	public GoogleDrivePageMain createNewDocFile(String fileName) {
+	public GoogleDrivePageMain createNewDocFile(String fileName) throws InterruptedException {
 		createNewItemButton.waitAndClick();
 		createNewDocButton.waitAndClick();
+		Thread.sleep(1000);
+		switchToNewOpenedTab();
 		
-		// Переключаемся в новую вкладку, т.к. новый документ открывается в ней
-		ArrayList<String> tabs = new ArrayList<String>(getDriver().getWindowHandles());
-		getDriver().switchTo().window(tabs.get(1));
 		NewDocumentPage newDocumentPage = new NewDocumentPage();
 		newDocumentPage.fillDocWithData(fileName);
 		
-		// После заполнения документа закрываем вкладку с документом и возвращаемся в первую
-		getDriver().close();
-		getDriver().switchTo().window(tabs.get(0));
+		closeCurrentTabAndSwitchToPrevious();
+		
 		return newDocumentPage.goToGoogleDrive();
 	}
 	

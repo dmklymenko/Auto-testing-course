@@ -1,15 +1,14 @@
 package tests.google;
 
-import static tests.Main.getCurrentTimeStamp;
-
 import org.testng.annotations.Test;
 
 import pages.GooglePages.MainPage;
 import tests.Main;
+import static utils.DateTime.getCurrentTimeStamp;
 
 public class Drive extends Main{
 	
-	@Test(enabled = true)
+	@Test(enabled = false)
     public void createDocAndCheckItInGoogleDrive(){
 		String fileName = "New test doc " + getCurrentTimeStamp();
 		
@@ -21,21 +20,21 @@ public class Drive extends Main{
     			.verifyFileInListInGoogleDrive(fileName);
     }
     
-    @Test(enabled = true)
+    @Test(enabled = false)
     public void verifyUserNameAndEmailInGoogleDrive(){
     	MainPage mainPage = new MainPage();
     	mainPage.goToGoogleDriveDirectly()
     			.verifyUserNameAndEmail();
     }
     
-    @Test(enabled = true)
+    @Test(enabled = false)
     public void verifyFilesCountInDifferentViews(){
     	MainPage mainPage = new MainPage();
     	mainPage.goToGoogleDriveDirectly()
     			.verifyFilesCountInDifferentViews();
     }
     
-    @Test(enabled = true)
+    @Test(enabled = false)
     public void verifyNewFolderCreation(){
     	String newFolderTitle = "New test Folder " + getCurrentTimeStamp();
     	
@@ -46,7 +45,7 @@ public class Drive extends Main{
     			.verifyNewFolderCreated(newFolderTitle);
     }
     
-    @Test(enabled = true)
+    @Test(enabled = false)
     public void verifyMenuItemsTitles(){
     	MainPage mainPage = new MainPage();
     	
@@ -55,7 +54,7 @@ public class Drive extends Main{
     }
     
     @Test(enabled = true)
-    public void verifyAddingFilesToStarredFolder(){
+    public void verifyAddingFilesToStarredFolder() throws InterruptedException{
     	String starredFileName = "New starred file " + getCurrentTimeStamp();
     	
     	MainPage mainPage = new MainPage();
