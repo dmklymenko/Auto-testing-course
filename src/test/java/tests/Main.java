@@ -3,6 +3,8 @@ package tests;
 import static tests.Main.getDriver;
 
 import conf.CaptureScreenShotOnFailureListener;
+import utils.ConfigProperties;
+
 import java.awt.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
@@ -20,12 +22,12 @@ import org.openqa.selenium.*;
 @Listeners(CaptureScreenShotOnFailureListener.class)
 public class Main {
     private static WebDriver driver;
-    private String baseUrl = "https://www.google.com.ua/";
+    private String baseUrl = ConfigProperties.getTestProperty("baseUrl");
     private static ArrayList<String> tabs; 	// Список открытых вкладок браузера
 
     @BeforeMethod
     public void setUp(){
-    	System.setProperty("webdriver.chrome.driver", "src/test/java/drivers/chromedriver_2_29.exe");
+    	System.setProperty("webdriver.chrome.driver", "src/test/resources/drivers/chromedriver_2_29.exe");
         ChromeOptions options = new ChromeOptions();
 //        options.addArguments("--lang=en_US"); // Internationalization -> Set browser language
         ChromeDriver chromeDriver = new ChromeDriver(options);

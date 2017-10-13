@@ -5,6 +5,7 @@ import org.openqa.selenium.Keys;
 
 import elements.Label;
 import elements.TextInput;
+import interfaces.ISelector;
 
 import static org.testng.AssertJUnit.assertTrue;
 import static utils.DateTime.getCurrentDateTimeStamp;
@@ -13,9 +14,10 @@ import static tests.Main.waitInSeconds;
 
 public class NewDocumentPage {
 	
-	private TextInput docTitleInput = new TextInput(By.xpath("//input[@class='docs-title-input']"));
-	private TextInput docBodyInput = new TextInput(By.xpath("//span[2]/span/span"));
-	private Label documentLabel = new Label(By.xpath("//body[@itemtype='http://schema.org/CreativeWork/DocumentObject']"));
+	private TextInput docTitleInput = new TextInput(NewDocumentPageEnum.DOC_TITLE_INPUT.getXpath());
+	private TextInput docBodyInput = new TextInput(NewDocumentPageEnum.DOC_BODY_INPUT.getXpath());
+	
+	private Label documentLabel = new Label(NewDocumentPageEnum.DOCUMENT_LABEL.getXpath());
 	
 	/* ===============================================================
 	 * ПРОВЕРКИ
@@ -39,6 +41,45 @@ public class NewDocumentPage {
 	public GoogleDrivePageMain goToGoogleDrive() {
 		getDriver().get("https://drive.google.com/drive/my-drive");
 		return new GoogleDrivePageMain();
+	}
+	
+	
+	/* ===============================================================
+	 * ЛОКАТОРЫ
+	 * ===============================================================	 */
+	private enum NewDocumentPageEnum implements ISelector{
+		// Buttons
+		
+		
+		// Labels
+		DOCUMENT_LABEL("//body[@itemtype='http://schema.org/CreativeWork/DocumentObject']"),
+		
+		// TextInputs
+		DOC_TITLE_INPUT("//input[@class='docs-title-input']"),
+		DOC_BODY_INPUT("//span[2]/span/span");
+		
+		// Constructor etc.
+		private String locator;
+		
+		private NewDocumentPageEnum (String locator){
+			this.locator = locator;
+		}
+		
+		public String getLocator() {
+			return locator;
+		}
+		
+		public By getId() {
+			return By.id(getLocator());
+		}
+		
+		public By getXpath() {
+			return By.xpath(getLocator());
+		}
+		
+		public By getCssSelector() {
+			return By.cssSelector(getLocator());
+		}
 	}
 	
 } // END -- class NewDocumentPage

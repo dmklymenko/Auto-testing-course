@@ -18,21 +18,21 @@ import org.openqa.selenium.WebElement;
 import elements.Button;
 import elements.Label;
 import elements.TextInput;
+import enums.GoogleDrivePageMainEnum;
 
 public class GoogleDrivePageMain {
+	private Button accountPopup = new Button(GoogleDrivePageMainEnum.ACCOUNT_POPUP.getXpath());
+	private Button changeViewButton = new Button(GoogleDrivePageMainEnum.CHANGE_VIEW_BUTTON.getXpath());
+	private Button starredContextMenuItem = new Button(GoogleDrivePageMainEnum.STARRED_CONTEXT_MENU_ITEM.getXpath());
+	private Button starredSidebarMenuItem = new Button(GoogleDrivePageMainEnum.STARRED_SIDEBAR_MENU_ITEM.getXpath());
+	private Button createNewItemButton = new Button(GoogleDrivePageMainEnum.CREATE_NEW_ITEM_BUTTON.getXpath());
+	private Button createNewFolderButton = new Button(GoogleDrivePageMainEnum.CREATE_NEW_FOLDER_BUTTON.getXpath());
+	private Button createNewDocButton = new Button(GoogleDrivePageMainEnum.CREATE_NEW_DOC_BUTTON.getXpath());
+	private Button confirmationOKButton = new Button(GoogleDrivePageMainEnum.CONFIRMATION_OK_BUTTON.getXpath());
 	  
-	private Label userEmailLabel = new Label(By.xpath("//div/a[contains(@aria-label, 'Change profile picture')]/parent::*/div/div[2]"));
+	private Label userEmailLabel = new Label(GoogleDrivePageMainEnum.USER_EMAIL_LABEL.getXpath());
 	
-	private TextInput newFolderNameInput = new TextInput(By.xpath("//div/div/input"));
-	
-	private Button accountPopup = new Button(By.xpath("(//div/a[contains(@aria-label, 'Google')])[3]"));
-	private Button changeViewButton = new Button(By.xpath("//div[@role = 'button' and @data-tooltip-unhoverable][6]"));
-	private Button starredContextMenuItem = new Button(By.xpath("(//div/span[2]/span/div)[8]"));
-	private Button starredSidebarMenuItem = new Button(By.xpath("(//div[@data-name = 'name']/span)[6]"));
-	private Button createNewItemButton = new Button(By.xpath("//div/button[@type = 'button'][1]"));
-	private Button createNewFolderButton = new Button(By.xpath("//span/span/div[text() = 'Папка' or text() = 'Folder']"));
-	private Button createNewDocButton = new Button(By.xpath("//span/span/div[text() = 'Google Документы' or text() = 'Google Docs']"));
-	private Button confirmationOKButton = new Button(By.xpath("//button[@name = 'ok']"));
+	private TextInput newFolderNameInput = new TextInput(GoogleDrivePageMainEnum.NEW_FOLDER_NAME_INPUT.getXpath());
 		
 	/* ===============================================================
 	 * ПРОВЕРКИ
