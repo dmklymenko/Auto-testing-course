@@ -1,6 +1,7 @@
-package utils;
+package config;
 
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Properties;
 
@@ -10,10 +11,14 @@ public class ConfigProperties {
 
 	    static {
 	        try {
-	            fileInputStream = new FileInputStream("src/test/resources/config.properties");
+	            fileInputStream = new FileInputStream("src/test/java/config/config.properties");
 	            PROPERTIES = new Properties();
 	            PROPERTIES.load(fileInputStream);
-	        } catch (IOException e) {
+	        }
+	        catch (FileNotFoundException e) {
+	        	e.printStackTrace();
+			}
+	        catch (IOException e) {
 	            e.printStackTrace();
 	        } finally {
 	            if (fileInputStream != null)

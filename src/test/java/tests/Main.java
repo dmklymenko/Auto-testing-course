@@ -2,13 +2,9 @@ package tests;
 
 import static tests.Main.getDriver;
 
-import conf.CaptureScreenShotOnFailureListener;
-import utils.ConfigProperties;
-
 import java.awt.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.Dimension;
@@ -17,13 +13,16 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.events.EventFiringWebDriver;
 import org.testng.annotations.*;
+
+import config.CaptureScreenShotOnFailureListener;
+import config.ConfigProperties;
+
 import org.openqa.selenium.*;
 
 @Listeners(CaptureScreenShotOnFailureListener.class)
 public class Main {
     private static WebDriver driver;
     private String baseUrl = ConfigProperties.getTestProperty("baseUrl");
-    private static ArrayList<String> tabs; 	// Список открытых вкладок браузера
 
     @BeforeMethod
     public void setUp(){
@@ -62,20 +61,6 @@ public class Main {
         }
     }
     
-    public static void switchToNewOpenedTab(){
-    	tabs = new ArrayList<String>(getDriver().getWindowHandles());
-    	// Переключаемся на последнюю открытую вкладку
-		getDriver().switchTo().window(tabs.get(tabs.size()-1));
-    }
-    
-    public static void closeCurrentTabAndSwitchToPrevious(){
-    	// Предполагается, что текущая вкладка - это самая последняя открытая вкладка
-    	getDriver().close();
-    	// Удаляем закрытую вкладку из списка и переключаемся в предыдущую вкладку
-    	tabs.remove(tabs.size()-1);
-		getDriver().switchTo().window(tabs.get(tabs.size()-1));
-    }
-
     private static void maximizeScreen(WebDriver driver) {
         java.awt.Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         Point position = new Point(0, 0);

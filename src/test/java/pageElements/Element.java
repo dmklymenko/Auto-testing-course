@@ -1,4 +1,4 @@
-package elements;
+package pageElements;
 
 import com.google.common.base.Function;
 import org.openqa.selenium.*;

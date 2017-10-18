@@ -2,7 +2,7 @@ package pages.Habr;
 
 import org.openqa.selenium.By;
 
-import elements.Button;
+import pageElements.Button;
 
 public class ArticlePage {
 	

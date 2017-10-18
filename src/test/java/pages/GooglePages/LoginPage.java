@@ -1,19 +1,19 @@
 package pages.GooglePages;
 
-import elements.Button;
-import elements.TextInput;
 import interfaces.ISelector;
+import pageElements.Button;
+import pageElements.TextInput;
 
 import static tests.Main.waitInSeconds;
 
 import org.openqa.selenium.By;
 
 public class LoginPage {
-    private Button emailNextButton = new Button(LoginPageEnum.EMAIL_NEXT_BUTTON.getXpath());
-    private Button passwordNextButton = new Button(LoginPageEnum.PASSWORD_NEXT_BUTTON.getXpath());
+    private Button emailNextButton = new Button(LoginPageEnum.EMAIL_NEXT_BUTTON.getByXpath());
+    private Button passwordNextButton = new Button(LoginPageEnum.PASSWORD_NEXT_BUTTON.getByXpath());
 
-    private static TextInput emailInput = new TextInput(LoginPageEnum.EMAIL_INPUT.getCssSelector());
-    private TextInput passwordInput = new TextInput(LoginPageEnum.PASSWORD_INPUT.getCssSelector());
+    private static TextInput emailInput = new TextInput(LoginPageEnum.EMAIL_INPUT.getByCssSelector());
+    private TextInput passwordInput = new TextInput(LoginPageEnum.PASSWORD_INPUT.getByCssSelector());
     
     
     /* ===============================================================
@@ -58,15 +58,15 @@ public class LoginPage {
 			return locator;
 		}
 		
-		public By getId() {
+		public By getById() {
 			return By.id(getLocator());
 		}
 		
-		public By getXpath() {
+		public By getByXpath() {
 			return By.xpath(getLocator());
 		}
 		
-		public By getCssSelector() {
+		public By getByCssSelector() {
 			return By.cssSelector(getLocator());
 		}
 	}

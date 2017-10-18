@@ -2,12 +2,12 @@ package pages.GooglePages;
 
 import org.openqa.selenium.By;
 
-import elements.Button;
 import interfaces.ISelector;
+import pageElements.Button;
 
 public class GmailLoginPage {
 	
-	private static Button signInToGmailButton = new Button(GmailLoginPageEnum.SIGN_IN_TO_GMAIL_BUTTON.getXpath());
+	private static Button signInToGmailButton = new Button(GmailLoginPageEnum.SIGN_IN_TO_GMAIL_BUTTON.getByXpath());
 	
 	
 	/* ===============================================================
@@ -46,15 +46,15 @@ public class GmailLoginPage {
 			return locator;
 		}
 	
-		public By getId() {
+		public By getById() {
 			return By.id(getLocator());
 		}
 		
-		public By getXpath() {
+		public By getByXpath() {
 			return By.xpath(getLocator());
 		}
 	
-		public By getCssSelector() {
+		public By getByCssSelector() {
 			return By.cssSelector(getLocator());
 		}
 	}

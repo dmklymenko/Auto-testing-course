@@ -1,4 +1,4 @@
-package elements;
+package pageElements;
 
 import org.openqa.selenium.By;
 

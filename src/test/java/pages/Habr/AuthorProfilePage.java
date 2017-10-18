@@ -5,8 +5,8 @@ import static org.testng.Assert.assertTrue;
 
 import org.openqa.selenium.By;
 
-import elements.Button;
-import elements.Label;
+import pageElements.Button;
+import pageElements.Label;
 
 public class AuthorProfilePage {
 	

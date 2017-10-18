@@ -1,11 +1,11 @@
 package pages.Habr;
 
-import elements.Button;
-import elements.Label;
-
 import static org.testng.Assert.assertTrue;
 
 import org.openqa.selenium.By;
+
+import pageElements.Button;
+import pageElements.Label;
 
 public class SearchResultsPage {
 

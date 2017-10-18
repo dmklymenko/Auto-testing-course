@@ -2,8 +2,8 @@ package enums;
 
 import org.openqa.selenium.By;
 
-import elements.Button;
 import interfaces.ISelector;
+import pageElements.Button;
 
 public enum MainPageEnum implements ISelector {
     // Buttons
@@ -29,15 +29,15 @@ public enum MainPageEnum implements ISelector {
 		return locator;
 	}
 
-	public By getId() {
+	public By getById() {
 		return By.id(getLocator());
 	}
 	
-	public By getXpath() {
+	public By getByXpath() {
 		return By.xpath(getLocator());
 	}
 
-	public By getCssSelector() {
+	public By getByCssSelector() {
 		return By.cssSelector(getLocator());
 	}
 	

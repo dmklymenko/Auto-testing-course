@@ -3,8 +3,7 @@
 <suite name="Suite1" verbose="1" >
     <test name="Regression1">
         <classes>
-            <class name="tests.Docs"/>
-            <class name="tests.Search"/>
+            <class name="tests.habr.Search"/>
         </classes>
     </test>
 </suite>

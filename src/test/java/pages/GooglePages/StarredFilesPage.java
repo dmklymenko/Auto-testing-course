@@ -4,7 +4,7 @@ import static org.testng.Assert.assertTrue;
 
 import org.openqa.selenium.By;
 
-import elements.Label;
+import pageElements.Label;
 
 public class StarredFilesPage {
 

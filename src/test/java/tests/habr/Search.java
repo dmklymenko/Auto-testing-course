@@ -9,7 +9,7 @@ import tests.Main;
 
 public class Search extends Main{
 
-    @Test(enabled=false)
+    @Test(enabled=true)
     public void searchWithKeyboard() {
         MainPage mainPage = new MainPage();
         mainPage.activateKeyboard()

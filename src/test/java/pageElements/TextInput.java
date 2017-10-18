@@ -1,4 +1,4 @@
-package elements;
+package pageElements;
 
 import static tests.Main.getDriver;
 

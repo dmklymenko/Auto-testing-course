@@ -4,35 +4,31 @@ import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 import static org.testng.Assert.fail;
 import static tests.Main.getDriver;
-import static utils.DateTime.getCurrentDateTimeStamp;
-import static tests.Main.switchToNewOpenedTab;
-import static tests.Main.closeCurrentTabAndSwitchToPrevious;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
-import elements.Button;
-import elements.Label;
-import elements.TextInput;
 import enums.GoogleDrivePageMainEnum;
+import pageElements.Button;
+import pageElements.Label;
+import pageElements.TextInput;
+import utils.TabsSwitcher;
 
 public class GoogleDrivePageMain {
-	private Button accountPopup = new Button(GoogleDrivePageMainEnum.ACCOUNT_POPUP.getXpath());
-	private Button changeViewButton = new Button(GoogleDrivePageMainEnum.CHANGE_VIEW_BUTTON.getXpath());
-	private Button starredContextMenuItem = new Button(GoogleDrivePageMainEnum.STARRED_CONTEXT_MENU_ITEM.getXpath());
-	private Button starredSidebarMenuItem = new Button(GoogleDrivePageMainEnum.STARRED_SIDEBAR_MENU_ITEM.getXpath());
-	private Button createNewItemButton = new Button(GoogleDrivePageMainEnum.CREATE_NEW_ITEM_BUTTON.getXpath());
-	private Button createNewFolderButton = new Button(GoogleDrivePageMainEnum.CREATE_NEW_FOLDER_BUTTON.getXpath());
-	private Button createNewDocButton = new Button(GoogleDrivePageMainEnum.CREATE_NEW_DOC_BUTTON.getXpath());
-	private Button confirmationOKButton = new Button(GoogleDrivePageMainEnum.CONFIRMATION_OK_BUTTON.getXpath());
+	private Button accountPopup = new Button(GoogleDrivePageMainEnum.ACCOUNT_POPUP.getByXpath());
+	private Button changeViewButton = new Button(GoogleDrivePageMainEnum.CHANGE_VIEW_BUTTON.getByXpath());
+	private Button starredContextMenuItem = new Button(GoogleDrivePageMainEnum.STARRED_CONTEXT_MENU_ITEM.getByXpath());
+	private Button starredSidebarMenuItem = new Button(GoogleDrivePageMainEnum.STARRED_SIDEBAR_MENU_ITEM.getByXpath());
+	private Button createNewItemButton = new Button(GoogleDrivePageMainEnum.CREATE_NEW_ITEM_BUTTON.getByXpath());
+	private Button createNewFolderButton = new Button(GoogleDrivePageMainEnum.CREATE_NEW_FOLDER_BUTTON.getByXpath());
+	private Button createNewDocButton = new Button(GoogleDrivePageMainEnum.CREATE_NEW_DOC_BUTTON.getByXpath());
+	private Button confirmationOKButton = new Button(GoogleDrivePageMainEnum.CONFIRMATION_OK_BUTTON.getByXpath());
 	  
-	private Label userEmailLabel = new Label(GoogleDrivePageMainEnum.USER_EMAIL_LABEL.getXpath());
+	private Label userEmailLabel = new Label(GoogleDrivePageMainEnum.USER_EMAIL_LABEL.getByXpath());
 	
-	private TextInput newFolderNameInput = new TextInput(GoogleDrivePageMainEnum.NEW_FOLDER_NAME_INPUT.getXpath());
+	private TextInput newFolderNameInput = new TextInput(GoogleDrivePageMainEnum.NEW_FOLDER_NAME_INPUT.getByXpath());
 		
 	/* ===============================================================
 	 * ПРОВЕРКИ
@@ -118,12 +114,12 @@ public class GoogleDrivePageMain {
 		createNewItemButton.waitAndClick();
 		createNewDocButton.waitAndClick();
 		Thread.sleep(1000);
-		switchToNewOpenedTab();
+		TabsSwitcher.switchToNewOpenedTab();
 		
 		NewDocumentPage newDocumentPage = new NewDocumentPage();
 		newDocumentPage.fillDocWithData(fileName);
 		
-		closeCurrentTabAndSwitchToPrevious();
+		TabsSwitcher.closeCurrentTabAndSwitchToPrevious();
 		
 		return newDocumentPage.goToGoogleDrive();
 	}

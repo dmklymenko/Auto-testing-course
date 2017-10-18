@@ -3,9 +3,9 @@ package pages.GooglePages;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 
-import elements.Label;
-import elements.TextInput;
 import interfaces.ISelector;
+import pageElements.Label;
+import pageElements.TextInput;
 
 import static org.testng.AssertJUnit.assertTrue;
 import static utils.DateTime.getCurrentDateTimeStamp;
@@ -14,10 +14,10 @@ import static tests.Main.waitInSeconds;
 
 public class NewDocumentPage {
 	
-	private TextInput docTitleInput = new TextInput(NewDocumentPageEnum.DOC_TITLE_INPUT.getXpath());
-	private TextInput docBodyInput = new TextInput(NewDocumentPageEnum.DOC_BODY_INPUT.getXpath());
+	private TextInput docTitleInput = new TextInput(NewDocumentPageEnum.DOC_TITLE_INPUT.getByXpath());
+	private TextInput docBodyInput = new TextInput(NewDocumentPageEnum.DOC_BODY_INPUT.getByXpath());
 	
-	private Label documentLabel = new Label(NewDocumentPageEnum.DOCUMENT_LABEL.getXpath());
+	private Label documentLabel = new Label(NewDocumentPageEnum.DOCUMENT_LABEL.getByXpath());
 	
 	/* ===============================================================
 	 * ПРОВЕРКИ
@@ -69,15 +69,15 @@ public class NewDocumentPage {
 			return locator;
 		}
 		
-		public By getId() {
+		public By getById() {
 			return By.id(getLocator());
 		}
 		
-		public By getXpath() {
+		public By getByXpath() {
 			return By.xpath(getLocator());
 		}
 		
-		public By getCssSelector() {
+		public By getByCssSelector() {
 			return By.cssSelector(getLocator());
 		}
 	}

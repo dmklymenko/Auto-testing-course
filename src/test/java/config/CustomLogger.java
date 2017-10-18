@@ -1,4 +1,4 @@
-package conf;
+package config;
 
 import org.testng.Reporter;
 

@@ -1,8 +1,8 @@
 package pages.GooglePages;
 
-import elements.Button;
-import elements.Label;
 import enums.DocumentsPageEnum;
+import pageElements.Button;
+import pageElements.Label;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -15,7 +15,7 @@ import java.sql.Driver;
 
 public class DocumentsPage {
 
-    private Button createNewFileButton = new Button(DocumentsPageEnum.CREATE_NEW_FILE_BUTTON.getXpath());
+    private Button createNewFileButton = new Button(DocumentsPageEnum.CREATE_NEW_FILE_BUTTON.getByXpath());
 
     public NewDocumentPage createNewFile() {
         createNewFileButton.waitAndClick();
