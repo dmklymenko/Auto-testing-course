@@ -16,6 +16,9 @@ public class EmailPage {
 	private Label emailText = new Label(By.xpath("//table//div/div/div/div/div/div[@class = 'Bk']"));
 
 	
+	/* ===============================================================
+	 * ПРОВЕРКИ
+	 * =============================================================== */
 	public EmailPage verifyAttributesOfReceivedEmail(EmailDataProvider newEmail) {
 		assertTrue(subject.getText().contains(newEmail.getSubject()));
 		assertTrue(recipient.getText().contains(newEmail.getRecipient()));

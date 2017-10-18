@@ -10,7 +10,12 @@ import pageElements.TextInput;
 import utils.EmailDataProvider;
 
 import static org.testng.Assert.assertTrue;
+import static org.testng.Assert.fail;
 import static tests.Main.waitInSeconds;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import static tests.Main.getDriver;
 
 public class GmailPage {
@@ -25,6 +30,7 @@ public class GmailPage {
 	private TextInput newEmailSendToInput = new TextInput(GmailPageEnum.NEW_EMAIL_SEND_TO_INPUT.getByXpath());
 	private TextInput newEmailSubjectInput = new TextInput(GmailPageEnum.NEW_EMAIL_SUBJECT_INPUT.getByXpath());
 	private TextInput newEmailBodyInput = new TextInput(GmailPageEnum.NEW_EMAIL_BODY_INPUT.getByXpath());
+	
 	
 	/* ===============================================================
 	 * ПРОВЕРКИ
@@ -44,6 +50,12 @@ public class GmailPage {
 		assertTrue(emailIsReceived);
 		
 		return this;
+	}
+	
+	
+	public GmailPage verifyNewEmailsFormattedAsBold(EmailDataProvider...originalUnreadEmails) {
+		
+		
 	}
 	
 	
@@ -85,6 +97,17 @@ public class GmailPage {
 		
 		newReceivedEmailLabel.waitAndClick();
 		return new EmailPage();
+	}
+	
+	
+	public GmailPage markAllEmailsAsRead() {
+		List<WebElement> unreadEmailsOnPage = new ArrayList<WebElement>();
+		unreadEmailsOnPage = getDriver().findElements(By.xpath("//div/span/b"));
+		
+		if(unreadEmailsOnPage != null){
+			// markEmailsAsRead
+		}
+
 	}
 	
 	
@@ -135,5 +158,6 @@ public class GmailPage {
 			return By.cssSelector(getLocator());
 		}
 	}
+
 
 }

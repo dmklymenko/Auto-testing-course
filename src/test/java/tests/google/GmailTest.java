@@ -20,7 +20,7 @@ public class GmailTest extends Main{
 	}
 	
 	
-	@Test(enabled = true)
+	@Test(enabled = false)
 	public void verifyAttributesOfReceivedEmail(){
 		EmailDataProvider newEmail = new EmailDataProvider();
 		
@@ -29,6 +29,20 @@ public class GmailTest extends Main{
 				.createAndSendNewEmail(newEmail)
 				.openReceivedEmail(newEmail.getSubject())
 				.verifyAttributesOfReceivedEmail(newEmail);
+	}
+	
+	
+	@Test(enabled = true)
+	public void verifyNewEmailsFormattedAsBold(){
+		EmailDataProvider newEmail_1 = new EmailDataProvider();
+		EmailDataProvider newEmail_2 = new EmailDataProvider();
+		
+		MainPage mainPage = new MainPage();
+		mainPage.goToGmailDirectly()
+				.markAllEmailsAsRead()
+				.createAndSendNewEmail(newEmail_1)
+				.createAndSendNewEmail(newEmail_2)
+				.verifyNewEmailsFormattedAsBold(newEmail_1, newEmail_2);
 	}
 	
 }
