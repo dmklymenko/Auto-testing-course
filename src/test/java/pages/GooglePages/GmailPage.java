@@ -14,6 +14,7 @@ import static org.testng.Assert.fail;
 import static tests.Main.waitInSeconds;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import static tests.Main.getDriver;
@@ -55,7 +56,7 @@ public class GmailPage {
 	
 	public GmailPage verifyNewEmailsFormattedAsBold(EmailDataProvider...originalUnreadEmails) {
 		
-		
+		return this;
 	}
 	
 	
@@ -67,15 +68,12 @@ public class GmailPage {
 		if (welcomePopupIsShown()) {
 			welcomePopupCloseButton.click();
 		}
-		composeButton.click();
+		composeButton.waitAndClick();
 		newEmailSendToInput.waitForElementToBeClickable();
 		newEmailSendToInput.fillIn(email.getRecipient());
 		newEmailSubjectInput.fillIn(email.getSubject());
 		newEmailBodyInput.fillIn(email.getText());
 		newEmailSendButton.click();
-		
-		waitInSeconds(2);
-		
 		return this;
 	}
 	
@@ -100,14 +98,27 @@ public class GmailPage {
 	}
 	
 	
-	public GmailPage markAllEmailsAsRead() {
-		List<WebElement> unreadEmailsOnPage = new ArrayList<WebElement>();
-		unreadEmailsOnPage = getDriver().findElements(By.xpath("//div/span/b"));
+	public GmailPage clearInbox() {
+		List<WebElement> emailsList = new ArrayList<WebElement>();
+		boolean inboxIsEmpty = false;
 		
-		if(unreadEmailsOnPage != null){
-			// markEmailsAsRead
-		}
-
+		do {
+			// Получаем список писем
+			emailsList = getDriver().findElements(By.xpath("//div/table/tbody/tr[contains(@class, 'zA')]/td/div[@role='checkbox']"));
+			if (emailsList == null) {
+				inboxIsEmpty = true;
+			} else {
+				for (int i = 0; i < emailsList.size(); i++) {
+					// Выделяем все письма на странице
+					emailsList.get(i).click();
+				}
+				// Кликаем "Удалить"
+				new Button(By.xpath("//div[@role='button' and @act='10']")).waitAndClick();
+				inboxIsEmpty = true;
+			} 
+		} while (!inboxIsEmpty);
+		
+		return this;
 	}
 	
 	

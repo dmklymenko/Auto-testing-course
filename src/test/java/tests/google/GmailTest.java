@@ -39,7 +39,7 @@ public class GmailTest extends Main{
 		
 		MainPage mainPage = new MainPage();
 		mainPage.goToGmailDirectly()
-				.markAllEmailsAsRead()
+				.clearInbox()
 				.createAndSendNewEmail(newEmail_1)
 				.createAndSendNewEmail(newEmail_2)
 				.verifyNewEmailsFormattedAsBold(newEmail_1, newEmail_2);
