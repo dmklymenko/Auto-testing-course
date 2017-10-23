@@ -16,24 +16,36 @@ import org.testng.annotations.*;
 
 import config.CaptureScreenShotOnFailureListener;
 import config.ConfigProperties;
+import config.LoggingEventListener;
 
 import org.openqa.selenium.*;
 
 @Listeners(CaptureScreenShotOnFailureListener.class)
 public class Main {
-    private static WebDriver driver;
-    private String baseUrl = ConfigProperties.getTestProperty("baseUrl");
+    private WebDriver driver;
+    private static EventFiringWebDriver eDriver;
+    private LoggingEventListener eventLogListener;
+    private String baseUrl = ConfigProperties.getConfigProperty("baseUrl");
 
     @BeforeMethod
     public void setUp(){
+    	// Initializing instance of Chrome WebDriver
     	System.setProperty("webdriver.chrome.driver", "src/test/resources/drivers/chromedriver_2_29.exe");
         ChromeOptions options = new ChromeOptions();
-//        options.addArguments("--lang=en_US"); // Internationalization -> Set browser language
-        ChromeDriver chromeDriver = new ChromeDriver(options);
-        driver = new EventFiringWebDriver(chromeDriver);
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+      options.addArguments("--lang=en_US"); // Internationalization -> Set browser language
+        driver = new ChromeDriver(options);
+        
+        // Initializing EventFiringWebDriver using Chrome WebDriver instance
+        eDriver = new EventFiringWebDriver(driver);
+        
+        
+        // Now create object of EventListerHandler to register it with EventFiringWebDriver
+        eventLogListener = new LoggingEventListener();
+        eDriver.register(eventLogListener);
+        
+        eDriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         getDriver().get(baseUrl);
-        maximizeScreen(driver);
+        maximizeScreen(eDriver);
     }
 
     @AfterMethod(alwaysRun = true)
@@ -42,11 +54,11 @@ public class Main {
     }
 
     public static WebDriver getDriver(){
-        return driver;
+        return eDriver;
     }
     
     public static void stopDriver(){
-    	driver.quit();
+    	eDriver.quit();
     }
     
     public String getBaseUrl(){

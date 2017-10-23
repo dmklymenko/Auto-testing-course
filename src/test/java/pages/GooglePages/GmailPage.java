@@ -3,12 +3,16 @@ package pages.GooglePages;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
+import config.EmailData;
+import config.EmailService;
+import config.EmailServices;
+import dataProvider.EmailDataProvider;
 import interfaces.ISelector;
 import pageElements.Button;
 import pageElements.Label;
 import pageElements.TextInput;
-import utils.EmailDataProvider;
 
+import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 import static org.testng.Assert.fail;
 import static tests.Main.waitInSeconds;
@@ -55,8 +59,22 @@ public class GmailPage {
 	
 	
 	public GmailPage verifyNewEmailsFormattedAsBold(EmailDataProvider...originalUnreadEmails) {
-		
+		// Тег содержит 
 		return this;
+	}
+	
+	
+	public GmailPage verifyNewReceivedEmailViaAPI(EmailDataProvider email) {
+		
+		List<EmailData> emails = EmailServices.connectAndGetAllEmailsFromFolder("INBOX");
+		
+		String lastReceivedEmailSubject = emails.get(emails.size() - 1).getSubject();
+		
+		assertEquals(lastReceivedEmailSubject, email.getSubject());
+		
+//        EmailServices.waitForEmailAndRemoveAllMessagesFromFolder("INBOX");
+        return this;
+		
 	}
 	
 	
@@ -99,24 +117,24 @@ public class GmailPage {
 	
 	
 	public GmailPage clearInbox() {
-		List<WebElement> emailsList = new ArrayList<WebElement>();
+		List<WebElement> emailsList = new ArrayList<>();
 		boolean inboxIsEmpty = false;
 		
-		do {
-			// Получаем список писем
-			emailsList = getDriver().findElements(By.xpath("//div/table/tbody/tr[contains(@class, 'zA')]/td/div[@role='checkbox']"));
-			if (emailsList == null) {
-				inboxIsEmpty = true;
-			} else {
-				for (int i = 0; i < emailsList.size(); i++) {
-					// Выделяем все письма на странице
-					emailsList.get(i).click();
-				}
-				// Кликаем "Удалить"
-				new Button(By.xpath("//div[@role='button' and @act='10']")).waitAndClick();
-				inboxIsEmpty = true;
-			} 
-		} while (!inboxIsEmpty);
+			do {
+				// Получаем список писем
+				emailsList = getDriver().findElements(By.xpath("//div/table/tbody/tr[contains(@class, 'zA')]/td/div[@role='checkbox']"));
+				if (emailsList.size() == 0) {
+					inboxIsEmpty = true;
+				} else {
+					for (int i = 0; i < emailsList.size(); i++) {
+						// Выделяем все письма на странице
+						emailsList.get(i).click();
+					}
+					// Кликаем "Удалить"
+					new Button(By.xpath("//div[@role='button' and @act='10']")).waitAndClick();
+					inboxIsEmpty = true;
+				} 
+			} while (!inboxIsEmpty);
 		
 		return this;
 	}
@@ -133,8 +151,8 @@ public class GmailPage {
 	private enum GmailPageEnum implements ISelector{
 		// Buttons
 		 WELCOME_POPUP_CLOSE_BUTTON("//*[@id='close-button']"),
-		 COMPOSE_BUTTON("//div[text() = 'COMPOSE']"), 
-		 NEW_EMAIL_SEND_BUTTON("//div[text() = 'Send']"),
+		 COMPOSE_BUTTON("//div[text() = 'COMPOSE' or text() = 'НАПИСАТЬ']"), 
+		 NEW_EMAIL_SEND_BUTTON("//div[text() = 'Send' or text() = 'Отправить']"),
 		 REFRESH_BUTTON("//div/div[@aria-label = 'Обновить' or @aria-label = 'Refresh']/div"),
 		
 		// Labels
@@ -144,7 +162,7 @@ public class GmailPage {
 		// TextInputs
 		NEW_EMAIL_SEND_TO_INPUT("(//div/textarea)[1]"),
 		NEW_EMAIL_SUBJECT_INPUT("//input[@name = 'subjectbox']"),
-		NEW_EMAIL_BODY_INPUT("//div[@aria-label = 'Message Body']");
+		NEW_EMAIL_BODY_INPUT("//div[@aria-label = 'Message Body' or @aria-label='Тело письма']");
 		
 		// Constructor etc.
 		private String locator;

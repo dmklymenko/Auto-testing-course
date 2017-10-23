@@ -2,10 +2,10 @@ package tests.google;
 
 import org.testng.annotations.Test;
 
+import dataProvider.EmailDataProvider;
 import pages.GooglePages.MainPage;
 import tests.Main;
 import utils.DateTime;
-import utils.EmailDataProvider;
 
 public class GmailTest extends Main{
 	
@@ -32,7 +32,7 @@ public class GmailTest extends Main{
 	}
 	
 	
-	@Test(enabled = true)
+	@Test(enabled = false)
 	public void verifyNewEmailsFormattedAsBold(){
 		EmailDataProvider newEmail_1 = new EmailDataProvider();
 		EmailDataProvider newEmail_2 = new EmailDataProvider();
@@ -43,6 +43,16 @@ public class GmailTest extends Main{
 				.createAndSendNewEmail(newEmail_1)
 				.createAndSendNewEmail(newEmail_2)
 				.verifyNewEmailsFormattedAsBold(newEmail_1, newEmail_2);
+	}
+	
+	@Test(enabled = true)
+	public void verifyNewReceivedEmailViaAPI(){
+		EmailDataProvider newEmail = new EmailDataProvider();
+		
+		MainPage mainPage = new MainPage();
+		mainPage.goToGmailDirectly()
+				.createAndSendNewEmail(newEmail)
+				.verifyNewReceivedEmailViaAPI(newEmail);
 	}
 	
 }

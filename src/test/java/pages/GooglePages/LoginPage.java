@@ -8,6 +8,8 @@ import static tests.Main.waitInSeconds;
 
 import org.openqa.selenium.By;
 
+import config.ConfigProperties;
+
 public class LoginPage {
     private Button emailNextButton = new Button(LoginPageEnum.EMAIL_NEXT_BUTTON.getByXpath());
     private Button passwordNextButton = new Button(LoginPageEnum.PASSWORD_NEXT_BUTTON.getByXpath());
@@ -20,10 +22,10 @@ public class LoginPage {
 	 * ДЕЙСТВИЯ С ЭЛЕМЕНТАМИ СТРАНИЦЫ И НА СТРАНИЦЕ etc.
 	 * ===============================================================	 */
     public void login(){
-        emailInput.fillIn("autopioneer1@gmail.com");
+        emailInput.fillIn(ConfigProperties.getEmailProperty("loginEmail"));
         emailNextButton.click();
         waitInSeconds(2);
-        passwordInput.fillIn("123123123A");
+        passwordInput.fillIn(ConfigProperties.getEmailProperty("password"));
         passwordNextButton.click();
     }
 

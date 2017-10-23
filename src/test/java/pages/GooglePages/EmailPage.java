@@ -6,9 +6,9 @@ import static org.testng.Assert.assertTrue;
 import org.openqa.selenium.By;
 
 import config.ConfigProperties;
+import dataProvider.EmailDataProvider;
 import pageElements.Label;
 import utils.DateTime;
-import utils.EmailDataProvider;
 
 public class EmailPage {
 	private Label subject = new Label(By.xpath("//tr//div/div/h2"));

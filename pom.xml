@@ -5,12 +5,25 @@
   <version>0.0.1-SNAPSHOT</version>
   <name>QA - Auto Testing</name>
   
+  <properties>
+      <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+      <seleniumhq.version>2.45.0</seleniumhq.version>
+  </properties>
+  
+  
+  
     <dependencies>
 		<dependency>
 		     <groupId>org.seleniumhq.selenium</groupId>
 		     <artifactId>selenium-java</artifactId>
 		     <version>3.5.3</version>
 	 	</dependency> 
+	 	
+	 	<dependency>
+           <groupId>junit</groupId>
+           <artifactId>junit</artifactId>
+           <version>4.11</version>
+        </dependency>
 	 	
 	 	<dependency>
 	        <groupId>org.seleniumhq.selenium</groupId>
@@ -25,6 +38,12 @@
 		    <version>6.11</version>
 		    <scope>test</scope>
 		</dependency>
+		
+		<dependency>
+             <groupId>com.sun.mail</groupId>
+             <artifactId>javax.mail</artifactId>
+             <version>1.6.0</version>
+         </dependency>
 	 	
   </dependencies>
   
