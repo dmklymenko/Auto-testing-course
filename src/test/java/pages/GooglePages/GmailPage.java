@@ -74,7 +74,6 @@ public class GmailPage {
 		
 //        EmailServices.waitForEmailAndRemoveAllMessagesFromFolder("INBOX");
         return this;
-		
 	}
 	
 	
