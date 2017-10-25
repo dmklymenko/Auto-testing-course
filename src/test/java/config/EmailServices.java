@@ -97,7 +97,6 @@ public class EmailServices {
 		            }
 		        }
 		        return emailsList;
-		        
 			} // END -- getEmailDataFromMessages
 
 			private static Message[] getMessages(Folder folder) {
@@ -157,5 +156,10 @@ public class EmailServices {
 		        
 		        return workFolder;
 		    }
+
+			public static void waitForEmailAndRemoveAllMessagesFromFolder(String string) {
+				
+				
+			}
 
 }

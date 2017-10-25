@@ -45,7 +45,7 @@ public class GmailTest extends Main{
 				.verifyNewEmailsFormattedAsBold(newEmail_1, newEmail_2);
 	}
 	
-	@Test(enabled = true)
+	@Test(enabled = false)
 	public void verifyNewReceivedEmailViaAPI(){
 		EmailDataProvider newEmail = new EmailDataProvider();
 		

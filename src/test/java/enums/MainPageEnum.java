@@ -12,7 +12,7 @@ public enum MainPageEnum implements ISelector {
     NAVIGATIONBUTTON("(//div/a[contains(@title, 'Google')])[1]"),
     MOREBUTTON("(//div/a[contains(@aria-label, 'Google')])[1]"),
     DOCUMENTSBUTTON("//span[contains(text(), 'Документ')]"),
-    EMAILBUTTON("//span[text() = 'Почта']"),
+    EMAILBUTTON("//span[text() = 'Почта' or text() = 'Пошта' or text() = 'Gmail']"),
     
 	// TextInputs
 	RECOVERYEMAILINPUT("placeholder='you@example.com'"),

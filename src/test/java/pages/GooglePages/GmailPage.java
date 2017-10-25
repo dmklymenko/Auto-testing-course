@@ -53,7 +53,6 @@ public class GmailPage {
 				}
 			} while (i < 4 && !emailIsReceived); // Всего 3 цикла, т.к. неявное ожидание добавляет времени
 		assertTrue(emailIsReceived);
-		
 		return this;
 	}
 	
@@ -72,7 +71,7 @@ public class GmailPage {
 		
 		assertEquals(lastReceivedEmailSubject, email.getSubject());
 		
-//        EmailServices.waitForEmailAndRemoveAllMessagesFromFolder("INBOX");
+        EmailServices.waitForEmailAndRemoveAllMessagesFromFolder("INBOX");
         return this;
 	}
 	
@@ -152,7 +151,7 @@ public class GmailPage {
 		 WELCOME_POPUP_CLOSE_BUTTON("//*[@id='close-button']"),
 		 COMPOSE_BUTTON("//div[text() = 'COMPOSE' or text() = 'НАПИСАТЬ']"), 
 		 NEW_EMAIL_SEND_BUTTON("//div[text() = 'Send' or text() = 'Отправить']"),
-		 REFRESH_BUTTON("//div/div[@aria-label = 'Обновить' or @aria-label = 'Refresh']/div"),
+		 REFRESH_BUTTON("//div/div[@aria-label = 'Обновить' or @aria-label = 'Refresh']"),
 		
 		// Labels
 		WELCOME_POPUP_TITLE("//*[@id='welcome-step-2']/h1"),
